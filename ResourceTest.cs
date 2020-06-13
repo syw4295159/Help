@@ -36,6 +36,9 @@ public class ResourceTest : MonoBehaviour
 
         //二进制反序列化
         //BinaryDeSerilizeTest();
+
+        //UnityScriptObject读取数据
+        ReadTestAssets();
     }
 
     void SerilizeTest()
@@ -111,6 +114,14 @@ public class ResourceTest : MonoBehaviour
         TestSerilize ts = bf.Deserialize(ms) as TestSerilize;
         ms.Close();
         return ts;
+    }
+
+    void ReadTestAssets()
+    {
+        AssetsSerilize assets = UnityEditor.AssetDatabase.LoadAssetAtPath<AssetsSerilize>("Assets/Scripts/TestAssets.asset");
+        string listStr = "";
+        assets.TestList.ForEach(x => listStr += x.ToString());
+        Debug.LogFormat($"{assets.Id},{assets.Name},{listStr}");
     }
 
 }
